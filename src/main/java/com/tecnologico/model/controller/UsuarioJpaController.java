@@ -5,6 +5,7 @@
  */
 package com.tecnologico.model.controller;
 
+import com.tecnologico.jpa.util.JpaUtil;
 import com.tecnologico.model.Usuario;
 import com.tecnologico.model.controller.exceptions.NonexistentEntityException;
 import com.tecnologico.model.controller.exceptions.PreexistingEntityException;
@@ -15,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.EntityTransaction;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
@@ -25,11 +27,9 @@ import javax.transaction.UserTransaction;
  */
 public class UsuarioJpaController implements Serializable {
 
-    public UsuarioJpaController(UserTransaction utx, EntityManagerFactory emf) {
-        this.utx = utx;
-        this.emf = emf;
+    public UsuarioJpaController() {
+        this.emf = JpaUtil.getEntityManagerFactory();
     }
-    private UserTransaction utx = null;
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
@@ -37,15 +37,16 @@ public class UsuarioJpaController implements Serializable {
     }
 
     public void create(Usuario usuario) throws PreexistingEntityException, RollbackFailureException, Exception {
-        EntityManager em = null;
+        EntityManager em = getEntityManager();
+        EntityTransaction tx=em.getTransaction();
         try {
-            utx.begin();
+            tx.begin();
             em = getEntityManager();
             em.persist(usuario);
-            utx.commit();
+            tx.commit();
         } catch (Exception ex) {
             try {
-                utx.rollback();
+                tx.rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
@@ -61,15 +62,17 @@ public class UsuarioJpaController implements Serializable {
     }
 
     public void edit(Usuario usuario) throws NonexistentEntityException, RollbackFailureException, Exception {
-        EntityManager em = null;
+        EntityManager em = getEntityManager();
+        EntityTransaction tx=em.getTransaction();
+        
         try {
-            utx.begin();
+            tx.begin();
             em = getEntityManager();
             usuario = em.merge(usuario);
-            utx.commit();
+            tx.commit();
         } catch (Exception ex) {
             try {
-                utx.rollback();
+                tx.rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
@@ -89,9 +92,10 @@ public class UsuarioJpaController implements Serializable {
     }
 
     public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
-        EntityManager em = null;
+        EntityManager em = getEntityManager();
+        EntityTransaction tx=em.getTransaction();
         try {
-            utx.begin();
+            tx.begin();
             em = getEntityManager();
             Usuario usuario;
             try {
@@ -101,10 +105,10 @@ public class UsuarioJpaController implements Serializable {
                 throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
             }
             em.remove(usuario);
-            utx.commit();
+            tx.commit();
         } catch (Exception ex) {
             try {
-                utx.rollback();
+                tx.rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
@@ -161,5 +165,16 @@ public class UsuarioJpaController implements Serializable {
             em.close();
         }
     }
+    public Usuario findBy(String username,String password){
+        EntityManager em=getEntityManager();
+        Object objUser = em.createQuery("Select u From Usuario u Where u.username=:username and u.password=:password")
+                .setParameter("username", username)
+                .setParameter("password",password).getSingleResult();
+        
+        if(objUser!=null)return (Usuario)objUser;
+        
+        return null;
+    }
+    
     
 }

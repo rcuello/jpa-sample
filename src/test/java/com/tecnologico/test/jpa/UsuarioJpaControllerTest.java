@@ -5,9 +5,8 @@
  */
 package com.tecnologico.test.jpa;
 
-import com.tecnologico.jpa.util.Constants;
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+import com.tecnologico.model.Usuario;
+import com.tecnologico.model.controller.UsuarioJpaController;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -20,16 +19,16 @@ import org.junit.Test;
  */
 public class UsuarioJpaControllerTest {
     
-    private static EntityManager em = null;
+    //private static EntityManager em = null;
     
     public UsuarioJpaControllerTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
-        if (em == null) {
-            em = (EntityManager) Persistence.createEntityManagerFactory(Constants.UNIT_NAME).createEntityManager();
-        }
+//        if (em == null) {
+//            em = (EntityManager) Persistence.createEntityManagerFactory(Constants.UNIT_NAME).createEntityManager();
+//        }
     }
     
     @AfterClass
@@ -47,12 +46,9 @@ public class UsuarioJpaControllerTest {
     @Test
     public void findUser(){
         //EntityManagerFactory emf =JpaUtil.getEntityManagerFactory();
-        
-        Assert.assertNotNull(em);
+//        UsuarioJpaController dao=new UsuarioJpaController();
+//        Usuario user = dao.findBy("admin", "123");
+//        Assert.assertNotNull(user);
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
 }

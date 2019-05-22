@@ -10,7 +10,7 @@ package com.tecnologico.jpa.util;
  <a href='http://www.javapractices.com/Topic2.cjp'>class for constants</a>.)
 */
 public class Constants {
-    public static final String UNIT_NAME = "TodoApp.PU";
+    public static final String UNIT_NAME = "TodoApp.PU.SqlServer.Local";
     /** System property - <tt>line.separator</tt>*/
     public static final String NEW_LINE = System.getProperty("line.separator");
     /** System property - <tt>file.separator</tt>*/
