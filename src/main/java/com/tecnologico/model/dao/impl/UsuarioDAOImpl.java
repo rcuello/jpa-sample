@@ -11,6 +11,7 @@ import com.tecnologico.model.dao.UsuarioDAO;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
+
 /**
  *
  * @author rcuello
