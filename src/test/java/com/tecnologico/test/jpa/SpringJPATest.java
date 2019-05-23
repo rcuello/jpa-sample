@@ -17,6 +17,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 /**
  *
  * @author rcuello
+ * https://www.logicbig.com/tutorials/spring-framework/spring-data/stored-procedure.html
+ * https://github.com/eugenp/tutorials/blob/master/persistence-modules/spring-persistence-simple/pom.xml
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/application-context.xml")
