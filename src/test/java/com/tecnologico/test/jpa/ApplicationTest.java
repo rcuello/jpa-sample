@@ -16,6 +16,6 @@ public class ApplicationTest {
 //        ClassLoader classLoader = getClass().getClassLoader();
 //        File file = new File(classLoader.getResource("data.xml").getFile());
         
-        String xml = IOUtils.toString(this.getClass().getResourceAsStream("resources/xml/data.xml"),"UTF-8" );
+        String xml = IOUtils.toString(this.getClass().getResourceAsStream("/xml/data.xml"),"UTF-8" );
     }
 }
