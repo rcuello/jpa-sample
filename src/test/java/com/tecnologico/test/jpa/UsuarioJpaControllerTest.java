@@ -5,14 +5,12 @@
  */
 package com.tecnologico.test.jpa;
 
-import com.tecnologico.model.Usuario;
-import com.tecnologico.model.controller.UsuarioJpaController;
 import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 /**
  *
  * @author rcuello
@@ -45,6 +43,7 @@ public class UsuarioJpaControllerTest {
 
     @Test
     public void findUser(){
+        //FileUtils
         //EntityManagerFactory emf =JpaUtil.getEntityManagerFactory();
 //        UsuarioJpaController dao=new UsuarioJpaController();
 //        Usuario user = dao.findBy("admin", "123");

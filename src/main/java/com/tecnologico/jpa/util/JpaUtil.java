@@ -7,7 +7,6 @@ package com.tecnologico.jpa.util;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
 /**
  *
  * @author rcuello
