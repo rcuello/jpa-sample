@@ -1,0 +1,17 @@
+[
+    {
+        "idUsuario":1,
+        "username": "user01",
+        "password":"pwd1"
+    },
+    {
+        "idUsuario":2,
+        "username": "user02",
+        "password":"pwd2"
+    },
+    {
+        "idUsuario":3,
+        "username": "user03",
+        "password":"pwd3"
+    }
+]
